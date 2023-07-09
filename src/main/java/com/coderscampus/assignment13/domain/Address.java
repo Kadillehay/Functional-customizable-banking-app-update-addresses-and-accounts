@@ -1,5 +1,6 @@
 package com.coderscampus.assignment13.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -26,8 +27,8 @@ public class Address {
 		this.userId = userId;
 	}
 	
-	@OneToOne
-	@MapsId
+	@OneToOne(mappedBy = "address",cascade = CascadeType.ALL)
+//	@MapsId
 	@JoinColumn(name="user_id")
 	public User getUser() {
 		return user;

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -58,7 +59,7 @@ public class User {
 	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "user_account",
 	           joinColumns = @JoinColumn(name = "user_id"), 
 	           inverseJoinColumns = @JoinColumn(name = "account_id"))
@@ -68,7 +69,9 @@ public class User {
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
 	}
-	@OneToOne(mappedBy = "user")
+//	@OneToOne(mappedBy = "user")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
 	public Address getAddress() {
 		return address;
 	}
