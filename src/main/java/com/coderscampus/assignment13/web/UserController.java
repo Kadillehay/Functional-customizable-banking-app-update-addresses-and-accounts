@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.coderscampus.assignment13.domain.User;
+import com.coderscampus.assignment13.service.AddressService;
 import com.coderscampus.assignment13.service.UserService;
 
 @Controller
@@ -18,6 +19,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AddressService addressService;
 	
 	@GetMapping("/register")
 	public String getCreateUser (ModelMap model) {
@@ -51,13 +55,13 @@ public class UserController {
 		User user = userService.findById(userId);
 		model.put("users", Arrays.asList(user));
 		model.put("user", user);
-		return "users";
+		return "userdetails";
 	}
 	
 	@PostMapping("/users/{userId}")
 	public String postOneUser (User user) {
 		userService.saveUser(user);
-		return "redirect:/users/"+user.getUserId();
+		return "redirect:/users/"+ user.getUserId();
 	}
 	
 	@PostMapping("/users/{userId}/delete")
