@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "address")
 public class Address {
 	private Long userId;
 	private User user;
@@ -22,7 +24,7 @@ public class Address {
 	private String zipCode;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getUserId() {
 		return userId;
 	}
@@ -30,9 +32,9 @@ public class Address {
 		this.userId = userId;
 	}
 	
-	@OneToOne(mappedBy = "address",cascade = CascadeType.ALL)
-//	@MapsId
-	@JoinColumn(name="user_id")
+	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	@MapsId
+	@JoinColumn(name="user_id", referencedColumnName = "user_id")
 	public User getUser() {
 		return user;
 	}
@@ -81,4 +83,5 @@ public class Address {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	
 }

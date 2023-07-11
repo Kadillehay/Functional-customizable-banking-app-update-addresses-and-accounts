@@ -95,19 +95,43 @@ public class UserService {
 			user.getAccounts().add(savings);
 			accountRepo.save(checking);
 			accountRepo.save(savings);
+			
 		}
-		else {
-	        User existingUser = userRepo.findById(user.getUserId()).orElse(null);
-	        if (existingUser != null) {
-	            existingUser.getAddress().setAddressLine1(user.getAddress().getAddressLine1());
-	            existingUser.getAddress().setAddressLine2(user.getAddress().getAddressLine2());
-	            existingUser.getAddress().setCity(user.getAddress().getCity());
-	            existingUser.getAddress().setRegion(user.getAddress().getRegion());
-	            existingUser.getAddress().setCountry(user.getAddress().getCountry());
-	            existingUser.getAddress().setZipCode(user.getAddress().getZipCode());
-	        }
-		}
+		
 		return userRepo.save(user);
+	}
+	public void saveAddress(User user) {
+	    User existingUser = userRepo.findById(user.getUserId()).orElse(null);
+	    if (existingUser != null) {
+	        Address newAddress = user.getAddress();
+	        
+	        Address existingAddress = existingUser.getAddress();
+	        if (existingAddress == null) {
+	            existingAddress = new Address();
+	            existingUser.setAddress(existingAddress);
+	        }
+	        
+	        if (newAddress.getAddressLine1() != null) {
+	            existingAddress.setAddressLine1(newAddress.getAddressLine1());
+	        }
+	        if (newAddress.getAddressLine2() != null) {
+	            existingAddress.setAddressLine2(newAddress.getAddressLine2());
+	        }
+	        if (newAddress.getCity() != null) {
+	            existingAddress.setCity(newAddress.getCity());
+	        }
+	        if (newAddress.getRegion() != null) {
+	            existingAddress.setRegion(newAddress.getRegion());
+	        }
+	        if (newAddress.getCountry() != null) {
+	            existingAddress.setCountry(newAddress.getCountry());
+	        }
+	        if (newAddress.getZipCode() != null) {
+	            existingAddress.setZipCode(newAddress.getZipCode());
+	        }
+	        
+	        userRepo.save(existingUser);
+	    }
 	}
 		
 
