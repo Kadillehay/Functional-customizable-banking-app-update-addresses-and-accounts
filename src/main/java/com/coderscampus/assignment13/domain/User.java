@@ -30,6 +30,7 @@ public class User {
 	private List<Account> accounts = new ArrayList<>();
 	private Address address;
 	
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getUserId() {
 		return userId;
@@ -73,7 +74,7 @@ public class User {
 		this.accounts = accounts;
 	}
 //	@OneToOne(mappedBy = "user")
-	@OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	@OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
 //	@JoinColumn(name = "address_id")
 	public Address getAddress() {
 		return address;
@@ -109,4 +110,5 @@ public class User {
 			return false;
 		return true;
 	}
+	
 }

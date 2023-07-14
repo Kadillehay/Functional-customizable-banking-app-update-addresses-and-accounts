@@ -14,6 +14,7 @@ import com.coderscampus.assignment13.domain.Account;
 import com.coderscampus.assignment13.domain.Address;
 import com.coderscampus.assignment13.domain.User;
 import com.coderscampus.assignment13.repository.AccountRepository;
+import com.coderscampus.assignment13.repository.AddressRepository;
 import com.coderscampus.assignment13.repository.UserRepository;
 
 @Service
@@ -23,6 +24,9 @@ public class UserService {
 	private UserRepository userRepo;
 	@Autowired
 	private AccountRepository accountRepo;
+	@Autowired
+	private AddressRepository addressRepo;
+	
 
 	public List<User> findByUsername(String username) {
 		return userRepo.findByUsername(username);
@@ -117,4 +121,12 @@ public class UserService {
 	public void delete(Long userId) {
 		userRepo.deleteById(userId);
 	}
+	public User saveUser(User user, Address address) {
+		user.setAddress(address);
+		address.setUser(user);
+		addressRepo.save(address);
+		
+		return userRepo.save(user);
+	}
+	
 }

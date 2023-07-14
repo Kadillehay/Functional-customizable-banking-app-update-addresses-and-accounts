@@ -5,12 +5,15 @@ import org.springframework.stereotype.Service;
 
 import com.coderscampus.assignment13.domain.Address;
 import com.coderscampus.assignment13.domain.User;
+import com.coderscampus.assignment13.repository.AddressRepository;
 import com.coderscampus.assignment13.repository.UserRepository;
 
 @Service
 public class AddressService {
     private UserRepository userRepository;
     
+    @Autowired
+    private AddressRepository addressRepository;
     @Autowired
     public AddressService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -47,5 +50,15 @@ public class AddressService {
             newAddress.setZipCode(updatedAddress.getZipCode());
             user.setAddress(newAddress);
         }
+       
     }
+     public Address findAddressById (User user) {
+    	 Long userId = user.getUserId();
+    	 Address address = addressRepository.findAddressByUserId(userId);
+    	 if (address == null) {
+    		 address = new Address();
+    		 
+    	 }
+    	 return address;
+     }
 }

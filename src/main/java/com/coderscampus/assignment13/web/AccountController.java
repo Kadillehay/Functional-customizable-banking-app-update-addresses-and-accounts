@@ -26,16 +26,14 @@ public class AccountController {
 	    return "account"; 
 	}
 	
-	
+
 	@PostMapping("/users/{userId}/accounts/{accountId}")
-	public String createAccount(@PathVariable Long userId) {
+	public String createAccount(@PathVariable Long userId, @PathVariable Long accountId) {
 		Account createdAccount = userService.createAccount(userId);
 		if (createdAccount != null) {
 		} 
 		return "redirect:/users/" + userId + "/accounts/" + createdAccount.getAccountId();
-//		return "/users/" + userId + "/accounts/";
-		
-		
+//		return "/users/" + userId + "/accounts/";	
 	}
 	@GetMapping("/users/{userId}/accounts/{accountId}")
 	public String updateAccount(@PathVariable Long userId, @PathVariable Long accountId, @ModelAttribute Account account) {
