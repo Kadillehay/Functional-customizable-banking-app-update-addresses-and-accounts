@@ -71,8 +71,8 @@ public class UserService {
 
 		if (user != null) {
 			Account newAccount = new Account();
-			newAccount.setAccountName("New Account");
 			newAccount.getUsers().add(user);
+			newAccount.setAccountName("Account #" + user.getAccounts().size()); 
 
 			user.getAccounts().add(newAccount);
 			userRepo.save(user);
