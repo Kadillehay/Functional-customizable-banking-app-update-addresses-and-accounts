@@ -1,6 +1,7 @@
 package com.coderscampus.assignment13.web;
 
 import java.util.Arrays;
+
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.coderscampus.assignment13.domain.Account;
 import com.coderscampus.assignment13.domain.Address;
 import com.coderscampus.assignment13.domain.User;
 import com.coderscampus.assignment13.service.AddressService;
 import com.coderscampus.assignment13.service.UserService;
-
-import antlr.collections.List;
+import java.util.List;
+//import antlr.collections.List;
 
 @Controller
 public class UserController {
@@ -63,15 +65,16 @@ public class UserController {
 		System.out.println(address);
 		return "userdetails";
 	}
-	
+	//account stuff commented out, lost it on the display when added 
 	@PostMapping("/users/{userId}")
 	public String postOneUser (User user, Address address) {
 		System.out.println(address);
 		User foundUser = userService.findById(user.getUserId());
+//		List <Account> accounts = foundUser.getAccounts();
 		foundUser.setName(user.getName());
 		foundUser.setPassword(user.getPassword());
 		foundUser.setUsername(user.getUsername());
-//		List <Account> accounts = foundUser.getAccounts();
+//		foundUser.setAccounts(accounts);
 		userService.saveUser(user, address);
 		return "redirect:/users/"+ user.getUserId();
 	}
