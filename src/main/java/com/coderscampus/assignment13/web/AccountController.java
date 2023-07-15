@@ -58,12 +58,12 @@ public class AccountController {
 	    }
 	    return "redirect:/error.html";
 	}
-//	@GetMapping("/users/{userId}/accounts/{accountId}")
-//	public String getUserAccount(ModelMap modelMap, @PathVariable Long userId, @PathVariable Long accountId) {
-//		modelMap.put("user", this.userService.findById(userId));
-//		modelMap.put("account", userService.findAccountById(accountId));
-//		return "account";
-//	}
+	@GetMapping("/users/{userId}/accounts/{accountId}")
+	public String getUserAccount(ModelMap modelMap, @PathVariable Long userId, @PathVariable Long accountId) {
+		modelMap.put("user", this.userService.findById(userId));
+		modelMap.put("account", userService.findAccountById(accountId));
+		return "account";
+	}
 
 	
 }
