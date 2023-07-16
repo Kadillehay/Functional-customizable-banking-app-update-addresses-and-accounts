@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Account</title>
+</head>
+<body>
+    <h1>Create an Account</h1>
+
+
+   <!--   <div th:if="${existingAccountName}"> -->
+        <h3>Account Name: <span th:text="${account.accountName}"></span></h3>
+
+
+   <!--   <form action="@{/users/{userId}/accounts}" method="get">-->
+   <form th:action="@{/users/{userId}/accounts/{accountId}(userId=${userId}, accountId=${account.accountId})}" method="post">
+        <div>
+            Account Name: <input type="text" name="accountName" th:value="${account.accountName}" />
+        </div>
+        <div>
+        	
+            <input type="submit" value="Save Account" />
+        </div>
+    </form>
+
+    <a th:href="@{/users/{userId}(userId=${user.userId})}">Back</a>
+</body>
+</html>
