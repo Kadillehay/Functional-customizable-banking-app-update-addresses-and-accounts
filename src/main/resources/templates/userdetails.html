@@ -41,6 +41,9 @@
 				<div>
 					<input type="submit" value="Update User Account" />
 				</div>
+				<div>
+					<input type="hidden" th:field="${user.accounts}"/>
+				</div>
 			</form>
 			<form th:action="@{/users/{userId}/delete(userId=${user.userId})}" method="post">
 				<input type="submit" value="Delete User Account" />
@@ -73,6 +76,7 @@
 		<br>
 		<div th:if="${#lists.size(users) == 1}">
     <form th:action= "@{/users/{userId}/accounts/ (userId=${user.userId})}" method="post">  
+    	
         <input type="submit" value="Create New Bank Account" />
     </form>
     <br>

@@ -62,7 +62,8 @@ public class UserController {
 		model.put("users", Arrays.asList(user));
 		model.put("user", user);
 		model.put("address", address);
-		System.out.println(address);
+//		model.put("accounts", user.getAccounts());
+//		System.out.println(address);
 		return "userdetails";
 	}
 	//account stuff commented out, lost it on the display when added 

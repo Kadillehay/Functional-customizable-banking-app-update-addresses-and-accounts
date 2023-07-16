@@ -8,7 +8,7 @@
 
 
    <!--   <div th:if="${existingAccountName}"> -->
-        <h3>Account Name: <span th:text="${existingAccountName}"></span></h3>
+        <h3>Account Name: <span th:text="${account.accountName}"></span></h3>
 
 
    <!--   <form action="@{/users/{userId}/accounts}" method="get">-->
@@ -17,6 +17,7 @@
             Account Name: <input type="text" name="accountName" th:value="${account.accountName}" />
         </div>
         <div>
+        	
             <input type="submit" value="Save Account" />
         </div>
     </form>
