@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -23,7 +25,11 @@ import org.hibernate.annotations.NotFoundAction;
 @Table(name = "users")
 public class User {
 	private Long userId;
+//	added column 7/30
+	@Column(nullable = false,unique = true)
 	private String username;
+//	added transient7/30
+	@Transient
 	private String password;
 	private String name;
 	private LocalDate createdDate;

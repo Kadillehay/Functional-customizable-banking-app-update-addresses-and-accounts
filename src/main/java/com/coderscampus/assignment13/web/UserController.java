@@ -59,10 +59,13 @@ public class UserController {
 	@GetMapping("/users/{userId}")
 	public String getOneUser(ModelMap model, @PathVariable Long userId) {
 		User user = userService.findById(userId);
+	
 		Address address = addressService.findAddressById(user);
 		model.put("users", Arrays.asList(user));
 		model.put("user", user);
 		model.put("address", address);
+		
+		
 
 		return "userdetails";
 	}
@@ -70,12 +73,12 @@ public class UserController {
 	@PostMapping("/users/{userId}")
 	public String postOneUser(User user, Address address, HttpServletRequest request) {
 		System.out.println(address);
-		User foundUser = userService.findById(user.getUserId());
-
-		foundUser.setName(user.getName());
-		String password = request.getParameter("password");
-		foundUser.setPassword(password);
-		foundUser.setUsername(user.getUsername());
+//		User foundUser = userService.findById(user.getUserId());
+//
+//		foundUser.setName(user.getName());
+//		String password = request.getParameter("password");
+//		foundUser.setPassword(password);
+//		foundUser.setUsername(user.getUsername());
 
 		userService.saveUser(user, address);
 		return "redirect:/users/" + user.getUserId();

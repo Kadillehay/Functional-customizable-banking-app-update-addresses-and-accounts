@@ -25,7 +25,8 @@ public class UserService {
 	@Autowired
 	private AccountRepository accountRepo;
 	@Autowired
-	private AddressRepository addressRepo;
+	private AddressRepository addressRepo; 
+	
 
 	public List<User> findByUsername(String username) {
 		return userRepo.findByUsername(username);
@@ -104,6 +105,7 @@ public class UserService {
 			accountRepo.save(savings);
 		} else if (address.getUserId() == null) {
 			user.setAddress(address);
+			
 			address.setAddressLine1(user.getAddress().getAddressLine1());
 			address.setAddressLine2(user.getAddress().getAddressLine2());
 			address.setCity(user.getAddress().getCity());
@@ -114,6 +116,20 @@ public class UserService {
 			address.setUser(user);
 			user.setAddress(address);
 		}
+		User foundUser = findById(user.getUserId());
+//		if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals(foundUser.getPassword())) {
+//			
+//			foundUser.setPassword(user.getPassword());
+		
+//			userRepo.save(foundUser);
+			
+			if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(foundUser.getPassword())) {
+			    user.setPassword(foundUser.getPassword());
+		
+		}else {
+			user.setPassword(foundUser.getPassword());
+		}
+		
 		return userRepo.save(user);
 	}
 
@@ -125,11 +141,24 @@ public class UserService {
 		// save accounts here??? there was nothing here before
 //		User existingUser = userRepo.findById(user.getUserId()).orElse(null);
 	
-		
-		
 		user.setAddress(address);
 		address.setUser(user);
+//		added the below line  
+		address.setUserId(user.getUserId());
 		addressRepo.save(address);
+		User foundUser = findById(user.getUserId());
+//		if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals(foundUser.getPassword())) {
+//			
+//			foundUser.setPassword(user.getPassword());
+//			userRepo.save(foundUser);
+//		}
+		if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(foundUser.getPassword())) {
+		    user.setPassword(foundUser.getPassword());
+		}
+		else {
+			user.setPassword(foundUser.getPassword());
+		}
+		
 
 		return userRepo.save(user);
 	}
