@@ -59,6 +59,7 @@ public class AddressService {
 		Address address = addressRepository.findAddressByUserId(userId);
 		if (address == null) {
 			address = new Address();
+			
 
 		}
 		return address;

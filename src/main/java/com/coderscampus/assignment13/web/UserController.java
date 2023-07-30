@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -66,12 +68,13 @@ public class UserController {
 	}
 
 	@PostMapping("/users/{userId}")
-	public String postOneUser(User user, Address address) {
+	public String postOneUser(User user, Address address, HttpServletRequest request) {
 		System.out.println(address);
 		User foundUser = userService.findById(user.getUserId());
 
 		foundUser.setName(user.getName());
-		foundUser.setPassword(user.getPassword());
+		String password = request.getParameter("password");
+		foundUser.setPassword(password);
 		foundUser.setUsername(user.getUsername());
 
 		userService.saveUser(user, address);

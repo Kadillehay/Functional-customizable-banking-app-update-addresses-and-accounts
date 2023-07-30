@@ -123,10 +123,12 @@ public class UserService {
 
 	public User saveUser(User user, Address address) {
 		// save accounts here??? there was nothing here before
-//		User foundUser = userRepo.findById(user.getUserId()).orElse(null);
+//		User existingUser = userRepo.findById(user.getUserId()).orElse(null);
+	
+		
+		
 		user.setAddress(address);
 		address.setUser(user);
-
 		addressRepo.save(address);
 
 		return userRepo.save(user);
