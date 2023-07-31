@@ -29,7 +29,7 @@ public class User {
 	@Column(nullable = false,unique = true)
 	private String username;
 //	added transient7/30
-	@Transient
+//	@Transient
 	private String password;
 	private String name;
 	private LocalDate createdDate;
@@ -53,7 +53,8 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+//	this line below is new, added 1930 7.30
+//	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	public String getPassword() {
 		return password;
 	}

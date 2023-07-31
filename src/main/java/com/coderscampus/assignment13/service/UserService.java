@@ -140,25 +140,27 @@ public class UserService {
 	public User saveUser(User user, Address address) {
 		// save accounts here??? there was nothing here before
 //		User existingUser = userRepo.findById(user.getUserId()).orElse(null);
-	
+		User foundUser = findById(user.getUserId());
+		
 		user.setAddress(address);
 		address.setUser(user);
-//		added the below line  
 		address.setUserId(user.getUserId());
-		addressRepo.save(address);
-		User foundUser = findById(user.getUserId());
+//		added the below line  
+		if (user.getPassword() == null || user.getPassword().isEmpty()) {
+//			user.setPassword(foundUser.getPassword());
+//			foundUser.setPassword(user.getPassword());
+			user.setPassword(foundUser.getPassword());
+		}
+//		else {
+//			user.setPassword(foundUser.getPassword());
+//		}
 //		if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals(foundUser.getPassword())) {
 //			
 //			foundUser.setPassword(user.getPassword());
 //			userRepo.save(foundUser);
 //		}
-		if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(foundUser.getPassword())) {
-		    user.setPassword(foundUser.getPassword());
-		}
-		else {
-			user.setPassword(foundUser.getPassword());
-		}
 		
+		addressRepo.save(address);
 
 		return userRepo.save(user);
 	}
