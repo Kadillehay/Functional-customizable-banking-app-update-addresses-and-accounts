@@ -26,7 +26,7 @@ import org.hibernate.annotations.NotFoundAction;
 public class User {
 	private Long userId;
 //	added column 7/30
-	@Column(nullable = false,unique = true)
+//	@Column(nullable = false,unique = true)
 	private String username;
 //	added transient7/30
 //	@Transient
