@@ -16,9 +16,15 @@
 			<div>
 				Full Name: <input type="text" th:field="${user.name}" />
 			</div>
+			<br>
 			<div>
 				<input type="submit" value="Create Account" />
 			</div>
+				<hr size ="3">
 		</form>
+		<br>
+		<div>
+		<a th:href="@{/users/{userId}(userId=${user.userId})}">Back</a>
+		</div>
 	</body>
 </html>

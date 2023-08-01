@@ -46,6 +46,7 @@
 				</div>
 			</form>
 			<form th:action="@{/users/{userId}/delete(userId=${user.userId})}" method="post">
+			<input type="hidden" name="_method" value="DELETE" />
 				<input type="submit" value="Delete User Account" />
 			</form>
 		<hr size ="3" color =gray>

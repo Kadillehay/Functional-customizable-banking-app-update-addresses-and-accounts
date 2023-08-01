@@ -116,19 +116,19 @@ public class UserService {
 			address.setUser(user);
 			user.setAddress(address);
 		}
-		User foundUser = findById(user.getUserId());
+//		User foundUser = findById(user.getUserId());
 //		if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals(foundUser.getPassword())) {
 //			
 //			foundUser.setPassword(user.getPassword());
 		
 //			userRepo.save(foundUser);
-			
-			if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(foundUser.getPassword())) {
-			    user.setPassword(foundUser.getPassword());
-		
-		}else {
-			user.setPassword(foundUser.getPassword());
-		}
+//			
+//			if (user.getPassword() == null || user.getPassword().isEmpty() || user.getPassword().equals(foundUser.getPassword())) {
+//			    user.setPassword(foundUser.getPassword());
+//		
+//		}else {
+//			user.setPassword(foundUser.getPassword());
+//		}
 		
 		return userRepo.save(user);
 	}
