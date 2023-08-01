@@ -1,7 +1,9 @@
 package com.coderscampus.assignment13.web;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,11 +49,13 @@ public class UserController {
 	@GetMapping("/users")
 	public String getAllUsers(ModelMap model) {
 		Set<User> users = userService.findAll();
-		
-//		insert sorting here  
-		model.put("users", users);
+//		insert sorting here  added line 53,54 and altered 57
+		List<User> userList = new ArrayList<>(users);
+		Collections.sort(userList, Comparator.comparing(User::getUserId));
+		model.put("users", userList);
 		if (users.size() == 1) {
-			model.put("user", users.iterator().next());
+			model.put("user", userList.get(0));
+//			model.put("user", users.iterator().next());
 		}
 
 		return "users";
