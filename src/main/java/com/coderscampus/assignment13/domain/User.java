@@ -89,7 +89,7 @@ public class User {
 		this.accounts = accounts;
 	}
 //removed orphan removal=true;
-	@OneToOne(mappedBy = "user", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@OneToOne(mappedBy = "user", cascade = { CascadeType.MERGE, CascadeType.PERSIST },orphanRemoval = true)
 	public Address getAddress() {
 		return address;
 	}

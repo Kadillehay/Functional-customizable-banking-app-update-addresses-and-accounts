@@ -134,9 +134,17 @@ public class UserService {
 	}
 
 	public void delete(Long userId) {
-		userRepo.deleteById(userId);
-	}
-
+		 User user = findById(userId);
+//		 userRepo.deleteById(userId);
+//		 addressRepo.deleteById(userId);
+		   if (user == null) {
+		        return; // User not found, do nothing
+		    }
+		   userRepo.deleteById(userId);
+		    }
+	
+		
+		  
 	public User saveUser(User user, Address address) {
 		// save accounts here??? there was nothing here before
 //		User existingUser = userRepo.findById(user.getUserId()).orElse(null);
